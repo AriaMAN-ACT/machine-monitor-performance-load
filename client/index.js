@@ -5,6 +5,22 @@ const socket = io('http://127.0.0.1:3001');
 
 socket.on('connect', () => {
     console.log('connected');
+    const networkInterface = os.networkInterfaces();
+    let macAddress;
+    for (let key in networkInterface) {
+        if (!networkInterface[key][0].internal) {
+            macAddress = networkInterface[key][0].mac;
+            break;
+        }
+    }
+    if (!macAddress) {
+        console.error('Internet Error: You need to be connected to network');
+        process.exit(1);
+    }
+    socket.emit('clientAuth', '');
+    const getPerformanceDataInterval = setInterval(() => {
+        getPerformanceData().then(data => socket.emit('performanceData', data)).catch(err => console.log(err));
+    }, 1000)
 });
 
 const cpus = os.cpus();
