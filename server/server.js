@@ -42,8 +42,9 @@ if (cluster.isMaster) {
 
     io.adapter(io_redis({ host: 'localhost', port: 6379 }));
 
-    io.on('connection', function(socket) {
-        MainSocket(io,socket);
+    io.on('connection', (socket) => {
+        MainSocket(io, socket);
+        console.log("connected to worker", cluster.worker.id);
     });
 
     process.on('message', function(message, connection) {
