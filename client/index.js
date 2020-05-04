@@ -69,7 +69,7 @@ const getPerformanceData = async () => {
     const freeMem = os.freemem();
     const totalMem = os.totalmem();
     const usedMem = totalMem - freeMem;
-    const memUsage = Math.floor(usedMem / totalMem * 100) / 100;
+    const memUsage = Math.floor((Math.floor(usedMem / totalMem * 10000) / 100) * 100) / 100;
     const cpuUsage = await getCpuLoad();
     return {
         osType,

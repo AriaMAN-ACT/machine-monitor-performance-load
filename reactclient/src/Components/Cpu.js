@@ -15,14 +15,17 @@ class Cpu extends Component {
                         text={`${this.props.data.cpuUsage}%`}
                         strokeWidth={4}
                         styles={buildStyles({
-                            strokeLinecap: "butt"
+                            strokeLinecap: "butt",
+                            textColor: '#00a8ff',
+                            pathColor: '#00a8ff',
+                            trailColor: '#353b48'
                         })}
                     >
                         <RadialSeparators
                             count={24}
                             style={{
-                                background: "#fff",
-                                width: "5px",
+                                background: "#f5f6fa",
+                                width: "2px",
                                 height: `${4}%`
                             }}
                         />
