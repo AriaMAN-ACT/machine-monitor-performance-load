@@ -33,6 +33,7 @@ module.exports = (io, socket) => {
         if (!result) {
             socket.emit('rebuild');
         }
+        data.macAddress = macAddress;
         io.to('reactclients').emit('data', data);
     });
     socket.on('clientAuth', () => {
