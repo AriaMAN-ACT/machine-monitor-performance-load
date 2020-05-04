@@ -9,7 +9,7 @@ socket.on('connect', () => {
     let macAddress;
     for (let key in networkInterface) {
         if (!networkInterface[key][0].internal) {
-            macAddress = networkInterface[key][0].mac;
+            macAddress = networkInterface[key][0].address;
             break;
         }
     }
@@ -18,9 +18,18 @@ socket.on('connect', () => {
         process.exit(1);
     }
     socket.emit('clientAuth', '');
+    getPerformanceData()
+        .then(data => {
+            data.macAddress = macAddress;
+            socket.emit('initPerformanceData', data);
+        })
+        .catch(err => console.log(err));
     const getPerformanceDataInterval = setInterval(() => {
         getPerformanceData().then(data => socket.emit('performanceData', data)).catch(err => console.log(err));
-    }, 1000)
+    }, 1000);
+    socket.on('disconnect', () => {
+        clearInterval(getPerformanceDataInterval);
+    });
 });
 
 const cpus = os.cpus();
