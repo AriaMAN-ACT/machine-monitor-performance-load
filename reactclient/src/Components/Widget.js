@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Cpu from "./Cpu";
 import Mem from "./Mem";
 import Info from "./Info";
+import '../style/Components/Widget.css';
 
 class Widget extends Component{
     render() {
@@ -23,10 +24,10 @@ class Widget extends Component{
         const mem = {totalMem, memUsage, freeMem};
         const info = {macAddress, osType, osUpTime, cpusModel, cpusSpeed, coresCount, cpusCount};
         return (
-            <div>
-                <Cpu data={cpu}/>
-                <Mem data={mem}/>
-                <Info data={info}/>
+            <div className="widget-container">
+                <Cpu data={cpu} className="widget-child"/>
+                <Mem data={mem} className="widget-child"/>
+                <Info data={info} className="widget-child"/>
             </div>
         );
     }

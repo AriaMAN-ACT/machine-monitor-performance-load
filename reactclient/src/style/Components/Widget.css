@@ -1,0 +1,12 @@
+.widget-container {
+    width: 90%;
+    padding: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.widget-child {
+    width: 33.3%;
+    display: inline-block;
+}
