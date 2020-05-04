@@ -81,7 +81,8 @@ const getPerformanceData = async () => {
         cpusSpeed,
         coresCount,
         cpusCount,
-        cpuUsage
+        cpuUsage,
+        isOffline: false
     };
 };
 

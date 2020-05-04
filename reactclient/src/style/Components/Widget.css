@@ -1,9 +1,12 @@
 .widget-container {
-    width: 90%;
-    padding: 20px;
+    width: 70%;
+    padding: 40px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    border: 2px #f5f6fa solid;
+    margin-top: 40px;
+    border-radius: 20px;
 }
 
 .widget-child {

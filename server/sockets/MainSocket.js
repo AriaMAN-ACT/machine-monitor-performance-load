@@ -36,6 +36,9 @@ module.exports = (io, socket) => {
         data.macAddress = macAddress;
         io.to('reactclients').emit('data', data);
     });
+    socket.on('disconnect', () => {
+        io.to('reactclients').emit('data', {macAddress, isOffline: true})
+    });
     socket.on('clientAuth', () => {
         socket.join('clients');
     });
