@@ -33,7 +33,12 @@ class Widget extends Component{
             );
         }
         return (
-            <div className="widget-container widget-offline"/>
+            <div className="widget-container widget-offline">
+                macAddress: {this.props.data.macAddress} <br/>
+                <div className="widget-offline-text">
+                    offline
+                </div>
+            </div>
         );
     }
 }

@@ -13,3 +13,7 @@
     width: 33.3%;
     display: inline-block;
 }
+
+.widget-offline {
+    background-color: #353b48;
+}
