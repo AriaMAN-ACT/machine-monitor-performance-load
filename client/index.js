@@ -17,7 +17,7 @@ socket.on('connect', () => {
         console.error('Internet Error: You need to be connected to network');
         process.exit(1);
     }
-    socket.emit('clientAuth', '');
+    socket.emit('clientAuth');
     getPerformanceData()
         .then(data => {
             data.macAddress = macAddress;

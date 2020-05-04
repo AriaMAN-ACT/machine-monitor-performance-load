@@ -33,9 +33,13 @@ module.exports = (io, socket) => {
         if (!result) {
             socket.emit('rebuild');
         }
+        io.to('reactclients').emit('data', data);
     });
-    socket.on('clientAuth', data => {
+    socket.on('clientAuth', () => {
         socket.join('clients');
+    });
+    socket.on('reactAuth', () => {
+        socket.join('reactclients');
     });
     socket.on('initPerformanceData', async data => {
         macAddress = data.macAddress;
