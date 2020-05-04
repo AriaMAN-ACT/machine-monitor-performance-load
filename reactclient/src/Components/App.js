@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import Widget from './Widget';
 import socket from "../utils/socketConnection";
 
 class App extends Component {
@@ -15,7 +16,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                App
+                <Widget/>
             </div>
         );
     }
