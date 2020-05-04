@@ -27,6 +27,14 @@ socket.on('connect', () => {
     const getPerformanceDataInterval = setInterval(() => {
         getPerformanceData().then(data => socket.emit('performanceData', data)).catch(err => console.log(err));
     }, 1000);
+    socket.on('rebuild', () => {
+        getPerformanceData()
+            .then(data => {
+                data.macAddress = macAddress;
+                socket.emit('initPerformanceData', data);
+            })
+            .catch(err => console.log(err));
+    });
     socket.on('disconnect', () => {
         clearInterval(getPerformanceDataInterval);
     });

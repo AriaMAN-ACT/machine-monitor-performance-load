@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const System = require('../models/System');
+
 mongoose.connect('mongodb://127.0.0.1/performance-data-monitor', {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -9,13 +11,34 @@ mongoose.connect('mongodb://127.0.0.1/performance-data-monitor', {
     console.log('database connected');
 });
 
+const checkAndAdd = async data => {
+    const isSystemAlreadyExists = await System.findOne({macAddress: data.macAddress});
+    if (isSystemAlreadyExists) {
+        return false;
+    } else {
+        const system = await System.create(data);
+        return true;
+    }
+};
+
+const checkAndUpdate = async (data, macAddress) => {
+    const isSystemAlreadyExists = await System.findOneAndUpdate({macAddress}, data);
+    return isSystemAlreadyExists && true;
+};
+
 module.exports = (io, socket) => {
     let macAddress;
-    socket.on('performanceData', data => {});
+    socket.on('performanceData', async data => {
+        const result = await checkAndUpdate(data, macAddress);
+        if (!result) {
+            socket.emit('rebuild');
+        }
+    });
     socket.on('clientAuth', data => {
         socket.join('clients');
     });
-    socket.on('initPerformanceData', data => {
-        checkAndAdd(data.macAddress);
+    socket.on('initPerformanceData', async data => {
+        macAddress = data.macAddress;
+        const result = await checkAndAdd(data);
     });
 };

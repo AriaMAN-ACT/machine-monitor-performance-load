@@ -2,15 +2,16 @@ const mongoose = require('mongoose');
 
 const systemSchema = new mongoose.Schema({
     macAddress: String,
-    cpuLoad: Number,
+    cpuUsage: Number,
     freeMem: Number,
     totalMem: Number,
-    usedMem: Number,
+    memUsage: Number,
     osType: String,
-    upTime: Number,
-    cpusModel: String,
-    cpusSpeed: String,
-    coresCount: Number
+    osUpTime: Number,
+    cpusModel: [String],
+    cpusSpeed: [String],
+    coresCount: Number,
+    cpusCount: Number
 });
 
 const System = mongoose.model('System', systemSchema);
